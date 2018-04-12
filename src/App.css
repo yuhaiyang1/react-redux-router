@@ -1,0 +1,52 @@
+.menu{
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 800px;
+}
+.link{
+  margin-right: 14px;
+}
+.selected{
+  font-weight: bold;
+  color: red
+}
+.img{
+  position: absolute;
+  right: 0;
+  top: -15px;
+  width: 100px;
+  height: 100px;
+  -webkit-animation: spin 1s linear infinite;/*鼠标hover时，i图标旋转,infinite表示动画无限循环*/
+    animation: img 1s linear infinite;   
+}
+ /*定义动画*/
+ @-webkit-keyframes img { /*兼容性写法。spin是关键帧的动画名称*/
+  from { /*动画起始状态*/
+    -webkit-transform: rotate(0deg);
+  }
+  to { /*动画结束状态*/
+    -webkit-transform: rotate(360deg);
+  }
+}
+@keyframes img{
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.logout {
+  position: absolute;
+  right: 100px;
+  font-weight: bolder;
+  cursor: pointer;
+}
+.username{
+  color: #1890ff;
+  font-size: 18px;
+  margin-left: 2px;
+  margin-right: 2px;
+}

@@ -1,0 +1,37 @@
+.loginArea{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 300px;
+
+}
+.users{
+  width: 60px;
+  margin: auto;
+  margin-top: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+.col {
+  display: flex;
+  align-items: baseline;
+  min-width: 200px;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+.label{
+  display: block;
+  min-width: 60px;
+}
+.input{
+  width: 400px;
+  height: 50px;
+  font-size: 24px;
+}
+img{
+  width: 150px;
+  margin-bottom: 10px;
+}
