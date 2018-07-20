@@ -1,11 +1,9 @@
 const username = window. localStorage.getItem('username')
-const avatar_url = window. localStorage.getItem('avatar_url')
 let initState = {
   loading: false,
-  loginStatus: (username, avatar_url) ? true : false,
+  loginStatus: (username) ? true : false,
   userInfo: {
     username: username,
-    avatar_url: avatar_url
   }
 }
 

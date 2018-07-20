@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import {fetchData} from '../../fetch/fetch'
 import './index.css'
 import './antd.css'
+import '../../mock/login'
 import {userInfo, loginStatus} from '../../redux/actions'
 @connect((state) => {
   const {loginStatus} = state
@@ -11,77 +12,29 @@ import {userInfo, loginStatus} from '../../redux/actions'
     loginStatus
   }
 })
-export default class App extends Component {
+export default class Login extends Component {
   state = {
     usrname: '',
-    password: '',
     checkStatus: true
   }
-  handChangle (e, type) {
-    const val = e.target.value
-    switch (type) {
-      case 'username':
-        this.setState({username: val})
-        break;
-      case 'password':
-        this.setState({password: val})
-        break;
-      default:
-        break;
-    }
+  handChangle = (type) => (e) => {
+    this.setState({[type]: e.target.value})
   }
   login = async () => {
     const {username} = this.state
-    if(username) {
-      await this.getPersonInfo(username)
-      await this.getPersonReops(username)
+    const res = await fetchData({
+      url: '/login',
+      type: 'post'
+    })
+    if(res.success) {
       this.props.dispatch(loginStatus(true))
+      this.props.dispatch(userInfo({username}))
       window.localStorage.setItem('username', username)
-     
     }else{
       message.error('用户名或者密码没填')
     }
   }
-  // 获取个人账号信息
-  async getPersonInfo (username) {
-    try {
-      const res = await fetchData({
-        url: `https://api.github.com/users/${username}`,
-        type: 'get',
-        data: {}
-      })
-      if(res.avatar_url) {
-        const {avatar_url} = res
-        window.localStorage.setItem('avatar_url',avatar_url)
-        this.props.dispatch(userInfo({username, avatar_url}))
-      }else{
-        message.error('账号不存在')
-        this.props.dispatch(userInfo({username: '', avatar_url: ''}))
-      }
-    } catch (error) {
-      message.error('账号不存在')
-      this.props.dispatch(userInfo({username: '', avatar_url: ''}))
-      this.props.dispatch(loginStatus(false))
-    }
-  }
-  // 获取个人仓库信息
-  async getPersonReops (username) {
-    try {
-      const res = await fetchData({
-        url: `https://api.github.com/users/${username}/repos?type=owner`,
-        type: 'get',
-        data: {}
-      })
-      if(res) {
-        console.log(res)
-      }else{
-        message.error('账号不存在')
-      }
-    } catch (error) {
-      message.error('账号不存在')
-      this.props.dispatch(loginStatus(false))
-    }
-  }
+  
   renderForm () {
     return <div className='loginArea'>
       <div className='users'> 
@@ -91,12 +44,12 @@ export default class App extends Component {
       <div className='col'>
         <Input
           className='input'
-          placeholder='请输入github用户名'
-          onChange={(e) => this.handChangle(e, 'username')}
+          placeholder='请输入用户名'
+          onChange={this.handChangle('username')}
         />
       </div>
       <div className='col'>
-        <Button  type="primary" onClick={this.login} className='input'>登录</Button>
+        <Button  type="primary" onClick={this.login(index, 'qq')} className='input'>登录</Button>
       </div>
     </div>
   }
