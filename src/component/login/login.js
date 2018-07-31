@@ -18,6 +18,7 @@ export default class Login extends Component {
     checkStatus: true
   }
   handChangle = (type) => (e) => {
+    // this.setState(null)
     this.setState({[type]: e.target.value})
   }
   login = async () => {
@@ -49,7 +50,7 @@ export default class Login extends Component {
         />
       </div>
       <div className='col'>
-        <Button  type="primary" onClick={this.login(index, 'qq')} className='input'>登录</Button>
+        <Button  type="primary" onClick={this.login} className='input'>登录</Button>
       </div>
     </div>
   }
